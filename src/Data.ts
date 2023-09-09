@@ -9,6 +9,26 @@ export const fields: DynamicFieldData[] = [
     config: {
       required: "Required",
     },
+    children: [
+      {
+        fieldName: "radio-1",
+        inputType: "radio",
+        label: "Radio",
+        defaultValue: "radio-1",
+        config: {
+          required: "Required",
+        },
+      },
+      {
+        fieldName: "radio-2",
+        inputType: "radio",
+        label: "Radio",
+        defaultValue: "radio-2",
+        config: {
+          required: "Required",
+        },
+      },
+    ],
   },
   {
     fieldName: "age",

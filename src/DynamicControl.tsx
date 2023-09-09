@@ -47,8 +47,8 @@ export const DynamicControl = ({
       return (
         <input
           type="radio"
+          value={defaultValue}
           {...register(fieldName, config)}
-          defaultValue={defaultValue}
         />
       );
     default:
