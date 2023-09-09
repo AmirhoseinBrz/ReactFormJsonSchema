@@ -2,6 +2,24 @@ import { FormProvider, useForm } from "react-hook-form";
 import { DynamicFieldData } from "./DynamicControlTypes";
 import { DynamicControl } from "./DynamicControl";
 import { ErrorMessage } from "@hookform/error-message";
+import { fields } from "./Data";
+
+const renderFields = (fields, errors) => {
+  return fields.map((field, index) => (
+    <div key={index}>
+      <label htmlFor={field.fieldName}>{field.label}</label>
+      <DynamicControl {...field} />
+      <ErrorMessage errors={errors} name={field.fieldName} />
+
+      {/* Check if the field has children */}
+      {field.children && field.children.length > 0 && (
+        <div>
+          {renderFields(field.children, errors)} {/* Recursive call */}
+        </div>
+      )}
+    </div>
+  ));
+};
 
 interface FormProps {
   fields: DynamicFieldData[];
@@ -23,13 +41,7 @@ export const Form = ({ fields }: FormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormProvider {...formMethods}>
-        {fields.map((d, index) => (
-          <div key={index}>
-            <label htmlFor={d.fieldName}>{d.label}</label>
-            <DynamicControl {...d} />
-            <ErrorMessage errors={errors} name={d.fieldName} />
-          </div>
-        ))}
+        {renderFields(fields, errors)}
       </FormProvider>
       <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Submitting" : "Submit"}

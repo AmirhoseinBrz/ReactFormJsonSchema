@@ -11,7 +11,8 @@ export interface DynamicFieldData {
   label: string;
   inputType: ControlType;
   fieldName: string;
-  defaultValue: string | number;
+  defaultValue?: string | number;
   options?: SelectOption[];
   config?: RegisterOptions;
+  children?: DynamicFieldData[];
 }
